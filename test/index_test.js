@@ -1,6 +1,6 @@
 //Import Modules
 const assert = require('assert')
-
+const {sequelize, testConnection }= require('../database/dbconnection.js')
 
 //Test DB Connection
 describe('Test Database Connection', () => {
@@ -10,7 +10,7 @@ describe('Test Database Connection', () => {
     expected = true
 
     // Exercise
-    result = true
+    result = false
 
     // Validate
     assert.equal(result, expected)
