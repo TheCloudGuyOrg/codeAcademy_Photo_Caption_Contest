@@ -18,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest/issues"
   },
-  "homepage": "https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest#readme"
+  "homepage": "https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest#readme",
+  "devDependencies": {
+    "sequelize": "^6.29.3",
+    "sequelize-cli": "^6.6.0"
+  },
+  "dependencies": {
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4"
+  }
 }
