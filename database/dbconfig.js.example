@@ -1,0 +1,13 @@
+const DB_USER = 'name';
+const DB_PASSWORD = 'password';
+const PORT = 5432;
+const DB_HOST = 'localhost'; 
+const DB_DATABASE = 'database';
+
+module.exports = {
+    DB_USER,
+    DB_PASSWORD,
+    PORT,
+    DB_HOST,
+    DB_DATABASE
+  };
