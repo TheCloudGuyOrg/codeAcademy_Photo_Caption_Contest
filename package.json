@@ -1,0 +1,22 @@
+{
+  "name": "codeacademy_photo_caption_contest",
+  "version": "1.0.0",
+  "description": "Photo Caption Contest",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest.git"
+  },
+  "author": "Derek R. Cox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest/issues"
+  },
+  "homepage": "https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest#readme"
+}
