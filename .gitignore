@@ -3,6 +3,7 @@ _caption-contest-solution
 
 # Database
 database/dbconfig.js
+database/database.json
 
 #Node Modules
 node_modules/
