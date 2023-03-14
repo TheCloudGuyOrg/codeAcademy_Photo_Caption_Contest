@@ -4,6 +4,7 @@
     "password": null,
     "database": "Photo_Caption_Contest_Dev",
     "host": "localhost",
+    "port": "5432",
     "dialect": "postgres"
   },
   "test": {
@@ -11,6 +12,7 @@
     "password": null,
     "database": "Photo_Caption_Contest_Test",
     "host": "localhost",
+    "port": "5432",
     "dialect": "postgres"
   },
   "production": {
@@ -18,6 +20,7 @@
     "password": null,
     "database": "Photo_Caption_Contest_Prod",
     "host": "localhost",
+    "port": "5432",
     "dialect": "postgres"
   }
 }
