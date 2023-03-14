@@ -7,15 +7,13 @@ describe('Test Database Connection', () => {
   it('Connection Successful', async () => {
       
     // Setup
-    expected = true
+    const expected = true
+    let result = null
 
     // Exercise
-    result = false
+    
 
     // Validate
     assert.equal(result, expected)
-
-    // Teardown
-
   })
 })

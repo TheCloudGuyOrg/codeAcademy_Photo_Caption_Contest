@@ -18,5 +18,6 @@ const testConnection = async (request, response) => {
 
 testConnection()
 
+
 //Export DB Connection
 module.exports = { sequelize, testConnection }
