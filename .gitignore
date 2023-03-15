@@ -5,8 +5,11 @@ _caption-contest-solution
 database/dbconfig.js
 database/database.json
 
-#Node Modules
+# Node Modules
 node_modules/
 
-#Git Ignore
+# Content
+public/images/
+
+# Git Ignore
 .gitignore
