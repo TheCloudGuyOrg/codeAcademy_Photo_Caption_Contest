@@ -17,3 +17,23 @@ describe('Test Database Connection', () => {
     assert.equal(result, expected)
   })
 })
+
+/*
+Add tests for the following
+- getUsers
+- getUsersById
+- addUsers
+- addLogin
+- updateUsers
+
+- getPhotos
+- getPhotosById
+- addPhotos
+- updatePhotos
+- deletePhotos
+
+- getCaptionById
+- addCaption
+- updateCaption
+- deleteCaption
+*/
