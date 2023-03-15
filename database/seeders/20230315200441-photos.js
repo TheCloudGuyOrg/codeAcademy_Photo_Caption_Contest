@@ -3,33 +3,34 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    return await queryInterface.bulkInsert('photos', [{
+      name: 'Bryce Canyon 1',
+      url: 'file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/bryce_canyon.jpg',
+      citation: 'Derek R. Cox',
+      createdAt: new Date(),
+      updatedAt: new Date()
+      }, {
+      name: 'Bryce Canyon 2',
+      url: 'file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/bryce_canyon2.jpg',
+      citation: 'Derek R. Cox',
+      createdAt: new Date(),
+      updatedAt: new Date()
+      }, {
+      name: 'Cottonwood Pass',
+      url: 'file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/cottonwood_pass.jpg',
+      citation: 'Derek R. Cox',
+      createdAt: new Date(),
+      updatedAt: new Date()
+      }, {
+      name: 'Daisy at Echo Lake',
+      url: 'file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/daisy_echo_lake.jpg',
+      citation: 'Derek R. Cox',
+      createdAt: new Date(),
+      updatedAt: new Date()
+      } 
+    ])
   },
-
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+    return queryInterface.bulkDelete('photos', null, {});
+   }
 };
-
-/*
-file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/bryce_canyon.jpg
-
-file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/bryce_canyon2.jpg
-
-file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/cottonwood_pass.jpg
-
-file:///Users/dercox/Documents/Code/Code_Academy/Backend_Engineer/codeAcademy_Photo_Caption_Contest/public/images/daisy_echo_lake.jpg
-*/
