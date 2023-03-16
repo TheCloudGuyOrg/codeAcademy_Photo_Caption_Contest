@@ -59,6 +59,16 @@ paths:
         default:
           description: Default error sample response
       x-swagger-router-controller: Routescaptions
+    delete:
+      tags:
+      - /routes/captions
+      summary: Delete Caption
+      description: Delete Caption
+      operationId: deleteCaption
+      responses:
+        default:
+          description: Default error sample response
+      x-swagger-router-controller: Routescaptions
   /routes/photos/:
     summary: Photos Root
     description: Photos Root

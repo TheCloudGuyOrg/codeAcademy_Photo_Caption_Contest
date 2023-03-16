@@ -55,6 +55,8 @@ paths:
       responses:
         default:
           description: Default error sample response
+      tags:
+        - /routes/captions
   /routes/photos/:
     summary: Photos Root
     description: Photos Root

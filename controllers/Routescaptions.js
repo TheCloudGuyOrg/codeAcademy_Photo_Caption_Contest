@@ -13,6 +13,16 @@ module.exports.addCaption = function addCaption (req, res, next) {
     });
 };
 
+module.exports.deleteCaption = function deleteCaption (req, res, next) {
+  Routescaptions.deleteCaption()
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.getCaptionById = function getCaptionById (req, res, next) {
   Routescaptions.getCaptionById()
     .then(function (response) {
