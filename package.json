@@ -10,6 +10,9 @@
     "test": "mocha",
     "start": "index.js"
   },
+  "keywords": [
+    "swagger"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest.git"
@@ -27,6 +30,9 @@
   },
   "dependencies": {
     "pg": "^8.10.0",
-    "pg-hstore": "^2.3.4"
+    "pg-hstore": "^2.3.4",
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "oas3-tools": "^2.2.3"
   }
 }

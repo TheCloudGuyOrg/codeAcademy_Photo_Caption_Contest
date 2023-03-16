@@ -1,0 +1,169 @@
+openapi: 3.0.3
+info:
+  title: Swagger Photo Caption Contest - OpenAPI 3.0
+  version: 1.0.0
+  description: Swagger Photo Caption Contest - OpenAPI 3.0
+  contact:
+    email: derek.ryan.cox+swagger@thecloudguy.org
+    name: Derek R. Cox
+    url: www.thecloudguy.org
+  license:
+    name: GNU GENERAL PUBLIC LICENSE
+    url: https://www.gnu.org/licenses/
+externalDocs:
+  url: >-
+    https://github.com/TheCloudGuyOrg/codeAcademy_Photo_Caption_Contest/blob/main/README.md
+  description: GitHub Readme File
+paths:
+  /routes/captions/:
+    summary: Captions Root
+    description: Root of the captions URL
+    post:
+      summary: Add Caption
+      description: Add Caption
+      operationId: addCaption
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/captions
+  /routes/captions/:id:
+    summary: Captions by Id
+    description: URL to Captions by Id
+    get:
+      summary: Get Caption by Id
+      description: Get Caption by Id
+      operationId: getCaptionById
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/captions
+    put:
+      summary: Update Caption
+      description: Update Caption
+      operationId: updateCaption
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/captions
+    delete:
+      summary: Delete Caption
+      description: Delete Caption
+      operationId: deleteCaption
+      responses:
+        default:
+          description: Default error sample response
+  /routes/photos/:
+    summary: Photos Root
+    description: Photos Root
+    get:
+      summary: Get List of Photos
+      description: Get a List of Photos
+      operationId: getPhotos
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/photos
+    post:
+      summary: Add Photo
+      description: Add Photo
+      operationId: addPhotos
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/photos
+  /routes/photos/:id:
+    summary: Photos by ID
+    description: URL to Photos by Id
+    get:
+      summary: Get Photos by Id
+      description: Get Photos by Id
+      operationId: getPhotosById
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/photos
+    delete:
+      summary: Delete Photo
+      description: Delete Photo
+      operationId: deletePhotos
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/photos
+    put:
+      summary: Update Photo
+      description: Update Photo
+      operationId: updatePhotos
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/photos
+  /routes/users/:
+    summary: Users Root
+    description: Root of the users URL
+    get:
+      summary: Get List of Users
+      description: Get List of Users
+      operationId: getUsers
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/users
+    post:
+      summary: Add User
+      description: Add User
+      operationId: addUser
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/users
+  /routes/users/:id:
+    summary: Users by Id
+    description: URL to Users by Id
+    get:
+      summary: Get Users by Id
+      description: Get Users by Id
+      operationId: getUsersById
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/users
+    put:
+      summary: Update Users
+      description: Update Users
+      operationId: updateUsers
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/users
+  /routes/users/login:
+    summary: User Logins
+    description: URL to Logins
+    post:
+      summary: Add Login
+      description: Add Login
+      operationId: addLogin
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - /routes/users
+tags:
+  - name: /routes/photos
+    description: Routes to Photos URLs
+  - name: /routes/users
+    description: Routes to Users URLs
+  - name: /routes/captions
+    description: Routes to captions URLs
