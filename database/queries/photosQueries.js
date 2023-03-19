@@ -4,6 +4,8 @@ const Photo = models.photos
 
 
 //Queries
+
+
 const getPhotos = async (request, response) => {
     return await Photo.findAll({
         order: [
@@ -11,16 +13,14 @@ const getPhotos = async (request, response) => {
         ]
     })
     .then((photos) => { 
-        //response.status(200).send(photos)
-        console.log (JSON.stringify(photos, null, 2))
+        response.status(200).send(photos)
     })
     .catch((error) => {
-        //response.status(400).send(error)
-        console.log (error)
+        response.status(400).send(error)
     })
 }
 
-console.log(getPhotos())
+
 
 
 
