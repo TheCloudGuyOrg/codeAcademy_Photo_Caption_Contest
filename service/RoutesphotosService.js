@@ -3,6 +3,7 @@
 const models = require('../database/models');
 const Photo = models.photos
 
+
 /**
  * Get List of Photos
  * Get a List of Photos
