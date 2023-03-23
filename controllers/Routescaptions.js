@@ -1,44 +1,22 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var Routescaptions = require('../service/RoutescaptionsService');
+//Use Express
+const express = require("express");
+const captionApi = express.Router();
 
-module.exports.addCaption = function addCaption (req, res, next) {
-  Routescaptions.addCaption()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
+//Import Queries
+const {
+    getCaptionById,
+    addCaption,
+    updateCaption,
+    deleteCaption
+} = require('../service/RoutescaptionsService.js');
 
-module.exports.deleteCaption = function deleteCaption (req, res, next) {
-  Routescaptions.deleteCaption()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
+//Envelope API Routes
+captionApi.get('/:id', getCaptionById);
+captionApi.post('/', addCaption);
+captionApi.put('/:id', updateCaption);
+captionApi.delete('/:id', deleteCaption);
 
-module.exports.getCaptionById = function getCaptionById (req, res, next) {
-  Routescaptions.getCaptionById()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.updateCaption = function updateCaption (req, res, next) {
-  Routescaptions.updateCaption()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
+//Export API
+module.exports = captionApi;

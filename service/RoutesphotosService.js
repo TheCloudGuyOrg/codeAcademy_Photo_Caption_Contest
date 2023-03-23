@@ -72,6 +72,23 @@ exports.updatePhotos = async (request, response) => {
 
 /*  SWAGGER QUERIES
 
+exports.getPhotos = async (request, response) => {
+  return await Photo.findAll({
+      order: [
+          ['createdAt', 'ASC'],
+      ]
+  })
+  .then((photos) => { 
+      response.status(200).send(photos)
+  })
+  .catch((error) => {
+      response.status(400).send(error)
+  })
+}
+
+
+
+
 exports.addPhotos = function() {
   return new Promise(function(resolve, reject) {
     resolve();

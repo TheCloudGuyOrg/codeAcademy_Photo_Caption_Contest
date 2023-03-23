@@ -1,5 +1,7 @@
 'use strict';
-
+//Imports
+const models = require('../database/models');
+const Caption = models.captions
 
 /**
  * Add Caption

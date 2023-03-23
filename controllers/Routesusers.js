@@ -1,54 +1,25 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var Routesusers = require('../service/RoutesusersService');
+//Use Express
+const express = require("express");
+const usersApi = express.Router();
 
-module.exports.addLogin = function addLogin (req, res, next) {
-  Routesusers.addLogin()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
+//Import Queries
+const {
+    getUsers,
+    getUsersById,
+    addUser,
+    addLogin,
+    updateUsers
+} = require('../service/RoutesusersService.js');
 
-module.exports.addUser = function addUser (req, res, next) {
-  Routesusers.addUser()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
+//Envelope API Routes
+usersApi.get('/', getUsers);
+usersApi.get('/:id', getUsersById);
+usersApi.post('/', addUser);
+usersApi.post('/login', addLogin);
+usersApi.put('/:id', updateUsers);
 
-module.exports.getUsers = function getUsers (req, res, next) {
-  Routesusers.getUsers()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
 
-module.exports.getUsersById = function getUsersById (req, res, next) {
-  Routesusers.getUsersById()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.updateUsers = function updateUsers (req, res, next) {
-  Routesusers.updateUsers()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
+//Export API
+module.exports = usersApi;

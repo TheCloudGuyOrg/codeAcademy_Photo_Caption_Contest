@@ -1,5 +1,7 @@
 'use strict';
-
+//Imports
+const models = require('../database/models');
+const User = models.user
 
 /**
  * Add Login
@@ -30,8 +32,19 @@ exports.addUser = async (request, response) => {
  * no response value expected for this operation
  **/
 exports.getUsers = async (request, response) => {
-
+  return await User.findAll({
+    order: [
+        ['createdAt', 'ASC'],
+    ]
+})
+.then((users) => { 
+    response.status(200).send(users)
+})
+.catch((error) => {
+    response.status(400).send(error)
+})
 }
+
 
 
 /**
