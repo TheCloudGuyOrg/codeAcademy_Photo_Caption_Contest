@@ -51,7 +51,7 @@ To view the Swagger UI interface:
 
 
 ```
-open http://localhost:3000/docs
+open http://localhost:3001/docs
 ```
 
 
