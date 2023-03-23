@@ -35,7 +35,7 @@ exports.deletePhotos = async (request, response) => {
 exports.getPhotos = async (request, response) => {
   return await Photo.findAll({
       order: [
-          ['createdAt', 'ASC'],
+          ['id', 'ASC'],
       ]
   })
   .then((photos) => { 

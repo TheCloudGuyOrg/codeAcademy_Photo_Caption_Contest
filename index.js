@@ -44,6 +44,10 @@ http.createServer(swaggerApp).listen(swaggerPort, function () {
     console.log('Swagger-ui is available on (http://localhost:%d/docs)', swaggerPort);
 });
 
+//Close Ports
+
+//Export App
+module.exports = app;
 
 
 

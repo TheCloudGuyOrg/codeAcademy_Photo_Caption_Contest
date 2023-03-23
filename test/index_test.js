@@ -9,7 +9,7 @@ describe('GET /routes/photos', () => {
   it('status_code: 200', async () => {
       
       // Setup
-      const excerciseUrl = '/routes/photos'
+      const excerciseUrl = '/route/photos'
       const expected = 200
 
       // Exercise
@@ -22,17 +22,33 @@ describe('GET /routes/photos', () => {
       assert.equal(result, expected)
   })
 
-  it('Status: Success', async () => {
+  it('Status: OK', async () => {
         
     // Setup
-    const excerciseUrl = '/routes/photos'
-    const expected = 'Success'
+    const excerciseUrl = '/route/photos'
+    const expected = 'OK'
 
     // Exercise
     const response = await request(app)
         .get(excerciseUrl)
-       
-    const result = response._body.status
+
+    const result = response.res.statusMessage
+
+    // Verify
+    assert.equal(result, expected)
+  })
+
+  it('Validate: Database Retrieval', async () => {
+        
+    // Setup
+    const excerciseUrl = '/route/photos'
+    const expected = 'Bryce Canyon 1'
+
+    // Exercise
+    const response = await request(app)
+        .get(excerciseUrl)
+
+    const result = response.body[0].name
 
     // Verify
     assert.equal(result, expected)

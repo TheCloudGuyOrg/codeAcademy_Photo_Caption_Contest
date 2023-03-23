@@ -5,7 +5,8 @@
     "database": "Photo_Caption_Contest_Dev",
     "host": "localhost",
     "port": "5432",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "test": {
     "username": "dercox",
@@ -13,7 +14,8 @@
     "database": "Photo_Caption_Contest_Test",
     "host": "localhost",
     "port": "5432",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "production": {
     "username": "dercox",
@@ -21,6 +23,7 @@
     "database": "Photo_Caption_Contest_Prod",
     "host": "localhost",
     "port": "5432",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   }
 }
