@@ -1,4 +1,7 @@
 'use strict';
+//Imports
+const models = require('../database/models');
+const Photo = models.photos
 
 
 /**
@@ -7,10 +10,8 @@
  *
  * no response value expected for this operation
  **/
-exports.addPhotos = function() {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.addPhotos = async (request, response) => {
+
 }
 
 
@@ -20,10 +21,8 @@ exports.addPhotos = function() {
  *
  * no response value expected for this operation
  **/
-exports.deletePhotos = function() {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.deletePhotos = async (request, response) => {
+
 }
 
 
@@ -33,35 +32,73 @@ exports.deletePhotos = function() {
  *
  * no response value expected for this operation
  **/
+exports.getPhotos = async (request, response) => {
+  return await Photo.findAll({
+      order: [
+          ['createdAt', 'ASC'],
+      ]
+  })
+  .then((photos) => { 
+      response.status(200).send(photos)
+  })
+  .catch((error) => {
+      response.status(400).send(error)
+  })
+}
+
+
+/**
+ * Get Photos by Id
+ * Get Photos by Id
+ *
+ * no response value expected for this operation
+ **/
+exports.getPhotosById = async (request, response) => {
+
+}
+
+
+/**
+ * Update Photo
+ * Update Photo
+ *
+ * no response value expected for this operation
+ **/
+exports.updatePhotos = async (request, response) => {
+
+}
+
+
+
+/*  SWAGGER QUERIES
+
+exports.addPhotos = function() {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
+exports.deletePhotos = function() {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
 exports.getPhotos = function() {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
 
-
-/**
- * Get Photos by Id
- * Get Photos by Id
- *
- * no response value expected for this operation
- **/
 exports.getPhotosById = function() {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
 
-
-/**
- * Update Photo
- * Update Photo
- *
- * no response value expected for this operation
- **/
 exports.updatePhotos = function() {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
-
+*/

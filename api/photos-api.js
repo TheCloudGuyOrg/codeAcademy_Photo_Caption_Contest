@@ -9,7 +9,7 @@ const {
     addPhotos,
     updatePhotos,
     deletePhotos,
-} = require('../database/queries/photosQueries.js');
+} = require('../service/RoutesphotosService.js');
 
 //Envelope API Routes
 photosApi.get('/', getPhotos);
