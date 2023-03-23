@@ -2,7 +2,6 @@
 const request = require('supertest')
 const assert = require('assert')
 const app = require('../index.js')
-const Photo = require('../models/photos.js');
 
 
 //Test: GET /routes/photos

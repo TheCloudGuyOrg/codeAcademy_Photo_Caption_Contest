@@ -21,7 +21,7 @@ app.use("/route/captions", captionsRouter);
 const usersRouter = require("./controllers/Routesusers.js");
 app.use("/route/users", usersRouter);
 
-// swaggerRouter configuration
+//swaggerRouter configuration
 const options = {
     routing: {
         controllers: path.join(__dirname, './controllers')
@@ -35,7 +35,7 @@ const swaggerApp = expressAppConfig.getApp();
 const serverPort = process.env.PORT || 3000;
 const swaggerPort = 3001;
 
-// Initialize the Swagger middleware
+// Initialize Server
 app.listen(serverPort, () => {
     console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort); 
   });
