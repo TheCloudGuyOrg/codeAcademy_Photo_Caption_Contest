@@ -37,8 +37,15 @@ describe('GET /routes/photos', () => {
 
   it('Validate: Database Retrieval', async () => {
     // Setup
-    const excerciseUrl = '/route/photos'
-    const expected = 'Bryce Canyon 1'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
+   
+    const idResponse = await request(app)
+      .post(setupUrl)
+
+    const photoId = idResponse._body.data.id
+
+    const excerciseUrl = `/route/photos/${photoId}`
+    const expected = 'Photo_Test'
 
     // Exercise
     const response = await request(app)
@@ -48,6 +55,12 @@ describe('GET /routes/photos', () => {
 
     // Verify
     assert.equal(result, expected)
+
+    //Teardown
+    const teardownUrl = `/route/photos/${photoId}`
+ 
+    await request(app)
+      .delete(teardownUrl)
   })
 });
 
@@ -85,7 +98,7 @@ describe('GET /routes/photos/:id', () => {
 
   it('Validate: Database Retrieval', async () => {
     // Setup
-    const setupUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
    
     const idResponse = await request(app)
       .post(setupUrl)
@@ -116,7 +129,7 @@ describe('GET /routes/photos/:id', () => {
 describe('POST /route/photos/:id', () => {
   it('status_code: 201', async () => { 
     // Setup
-    const excerciseUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const excerciseUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     const expected = 201
 
     // Exercise
@@ -138,7 +151,7 @@ describe('POST /route/photos/:id', () => {
 
   it('Status: Success', async () => {  
     // Setup
-    const excerciseUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const excerciseUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     const expected = 'Success'
 
     // Exercise
@@ -160,7 +173,7 @@ describe('POST /route/photos/:id', () => {
   
   it('Validate: Database Retrieval', async () => { 
     // Setup
-    const excerciseUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const excerciseUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     const expected = 'Photo_Test'
 
     // Exercise
@@ -185,14 +198,14 @@ describe('POST /route/photos/:id', () => {
 describe('PUT /routes/photos/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
-    const setupUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const photoId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=fie://Photo_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=file://Photo_Test_2&citation=Daisy Rue Cox`
     const expected = 200
 
     // Exercise
@@ -213,14 +226,14 @@ describe('PUT /routes/photos/:id', () => {
 
   it('Status: Success', async () => {    
     // Setup
-    const setupUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const photoId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=fie://Photo_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=file://Photo_Test_2&citation=Daisy Rue Cox`
     const expected = 'Success'
 
     // Exercise
@@ -241,14 +254,14 @@ describe('PUT /routes/photos/:id', () => {
 
   it('Validate: Database Retrieval', async () => {     
     // Setup
-    const setupUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const photoId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=fie://Photo_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=file://Photo_Test_2&citation=Daisy Rue Cox`
     const expected = 1
 
     // Exercise
@@ -272,14 +285,14 @@ describe('PUT /routes/photos/:id', () => {
 describe('DELETE /routes/photos/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
-    const setupUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const photoId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=fie://Photo_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=file://Photo_Test_2&citation=Daisy Rue Cox`
     const expected = 200
 
     // Exercise
@@ -294,14 +307,14 @@ describe('DELETE /routes/photos/:id', () => {
 
   it('Status: Success', async () => {  
     // Setup
-    const setupUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const photoId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=fie://Photo_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=file://Photo_Test_2&citation=Daisy Rue Cox`
     const expected = 'Success'
 
     // Exercise
@@ -317,14 +330,14 @@ describe('DELETE /routes/photos/:id', () => {
   it('Validate: Database Retrieval', async () => {
         
     // Setup
-    const setupUrl = '/route/photos/?name=Photo_Test&url=fie://Photo_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const photoId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=fie://Photo_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/photos/${photoId}?name=Photo_Test_2&url=file://Photo_Test_2&citation=Daisy Rue Cox`
     const expected = '1'
 
     // Exercise

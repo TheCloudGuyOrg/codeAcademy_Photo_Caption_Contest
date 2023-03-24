@@ -4,6 +4,33 @@ const models = require('../database/models');
 const User = models.user
 
 /**
+ * Get List of Users
+ * Get List of Users
+ *
+ * no response value expected for this operation
+ **/
+exports.getUsers = async (request, response) => {
+  return await User.findAll({
+    order: [
+        ['createdAt', 'ASC'],
+    ]
+  })
+.then((users) => { 
+  response.status(200).send({
+    status: 'Success',
+    message: 'Photo Information retrieved',
+    data: users,
+  })
+})
+.catch((error) => {
+  response.status(500).send({
+    error: error.message
+  })
+})
+}
+
+
+/**
  * Add Login
  * Add Login
  *
@@ -25,25 +52,7 @@ exports.addUser = async (request, response) => {
 }
 
 
-/**
- * Get List of Users
- * Get List of Users
- *
- * no response value expected for this operation
- **/
-exports.getUsers = async (request, response) => {
-  return await User.findAll({
-    order: [
-        ['createdAt', 'ASC'],
-    ]
-})
-.then((users) => { 
-    response.status(200).send(users)
-})
-.catch((error) => {
-    response.status(400).send(error)
-})
-}
+
 
 
 
