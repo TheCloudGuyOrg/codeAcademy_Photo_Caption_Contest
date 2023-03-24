@@ -31,6 +31,16 @@ exports.getUsers = async (request, response) => {
 
 
 /**
+ * Get Users by Id
+ * Get Users by Id
+ *
+ * no response value expected for this operation
+ **/
+exports.getUsersById = async (request, response) => {
+
+}
+
+/**
  * Add Login
  * Add Login
  *
@@ -56,15 +66,7 @@ exports.addUser = async (request, response) => {
 
 
 
-/**
- * Get Users by Id
- * Get Users by Id
- *
- * no response value expected for this operation
- **/
-exports.getUsersById = async (request, response) => {
 
-}
 
 
 /**
@@ -76,37 +78,3 @@ exports.getUsersById = async (request, response) => {
 exports.updateUsers = async (request, response) => {
 
 }
-
-/*  SWAGGER QUERIES
-
-exports.addLogin = function() {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-exports.addUser = function() {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-exports.getUsers = function() {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-exports.getUsersById = function() {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-exports.updateUsers = function() {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-*/

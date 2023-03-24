@@ -1,19 +1,19 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class caption extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class captions extends Model {
     static associate(models) {
-      // define association here
+      captions.belongsTo(models.photos, {
+        foreignKey: 'photo_id',
+        as: 'photo'
+      })
+      captions.belongsTo(models.user, {
+        foreignKey: 'user_id',
+        as: 'user'
+      })
     }
   }
-  caption.init({
+  captions.init({
     photo_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -39,6 +39,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'caption',
   });
-  return caption;
+  return captions;
 };
 

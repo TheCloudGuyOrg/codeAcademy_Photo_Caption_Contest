@@ -342,9 +342,5 @@ describe('DELETE /routes/users/:id', () => {
 
 /*
 Add tests for the following
-- getUsers
-- getUsersById
-- addUsers
 - addLogin
-- updateUsers
 */
