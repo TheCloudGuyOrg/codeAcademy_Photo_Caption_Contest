@@ -131,8 +131,8 @@ describe('POST /api/v1/envelopes', () => {
   it('Status: Success', async () => {
       
       // Setup
-      const excerciseUrl = '/api/v1/envelopes?id=9999&title=test&budget=999'
-      const teardownUrl = '/api/v1/envelopes/9999'
+      const excerciseUrl = '/route/photos'
+      const teardownUrl = ''
       const expected = 'Success'
 
       // Exercise
