@@ -58,9 +58,18 @@ exports.getPhotosById = async (request, response) => {
  * no response value expected for this operation
  **/
 exports.addPhotos = async (request, response) => {
-
+  return await Photo.create({
+    name: request.query.name,
+    url: request.query.url,
+    citation: request.query.citation
+  })
+  .then((photo) => {
+    response.status(201).send(photo)
+  })
+  .catch((error) => {
+    response.status(400).send(error)
+  })
 }
-
 
 /**
  * Update Photo
