@@ -339,8 +339,71 @@ describe('DELETE /routes/users/:id', () => {
   })
 })
 
-
-/*
-Add tests for the following
-- addLogin
-*/
+//Test: Post /route/login
+describe('POST /route/login', () => {
+    it('status_code: 201', async () => { 
+      // Setup
+      const excerciseUrl = '/route/login'
+      const expected = 201
+  
+      // Exercise
+      const response = await request(app)
+        .post(excerciseUrl)
+  
+      const result = response.status
+      const userId = response._body.data.id
+  
+      // Verify
+      assert.equal(result, expected)
+  
+      //Teardown
+      const teardownUrl = `/route/login`
+   
+      await request(app)
+        .delete(teardownUrl)
+    })
+  
+    it('Status: Success', async () => {  
+      // Setup
+      const excerciseUrl = '/route/login'
+      const expected = 'Success'
+  
+      // Exercise
+      const response = await request(app)
+        .post(excerciseUrl)
+  
+      const result = response._body.status
+      const userId = response._body.data.id
+  
+      // Verify
+      assert.equal(result, expected)
+  
+      //Teardown
+      const teardownUrl = `/route/login`
+   
+      await request(app)
+        .delete(teardownUrl)
+    })  
+    
+    it('Validate: Database Retrieval', async () => { 
+      // Setup
+      const excerciseUrl = '/route/login'
+      const expected = 'user_Test'
+  
+      // Exercise
+      const response = await request(app)
+        .post(excerciseUrl)
+  
+      const result = response._body.data.name
+      const userId = response._body.data.id
+  
+      // Verify
+      assert.equal(result, expected)
+  
+      //Teardown
+      const teardownUrl = `/route/login`
+   
+      await request(app)
+        .delete(teardownUrl)
+    })
+  });

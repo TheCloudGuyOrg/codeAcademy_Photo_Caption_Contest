@@ -40,16 +40,6 @@ exports.getUsersById = async (request, response) => {
 
 }
 
-/**
- * Add Login
- * Add Login
- *
- * no response value expected for this operation
- **/
-exports.addLogin = async (request, response) => {
-
-}
-
 
 /**
  * Add User
@@ -62,13 +52,6 @@ exports.addUser = async (request, response) => {
 }
 
 
-
-
-
-
-
-
-
 /**
  * Update Users
  * Update Users
@@ -76,5 +59,16 @@ exports.addUser = async (request, response) => {
  * no response value expected for this operation
  **/
 exports.updateUsers = async (request, response) => {
+
+}
+
+
+/**
+ * Add Login
+ * Add Login
+ *
+ * no response value expected for this operation
+ **/
+exports.addLogin = async (request, response) => {
 
 }
