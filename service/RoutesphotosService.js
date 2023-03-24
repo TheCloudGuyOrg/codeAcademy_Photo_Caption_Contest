@@ -47,6 +47,11 @@ exports.getPhotosById = async (request, response) => {
     ]
   })
   .then((photos) => { 
+    if (!photos) {
+      response.status(404).send({
+        message: 'Photo Not Found',
+      })
+    }
     response.status(200).send({
       status: 'Success',
       message: 'Photo Information retrieved',
@@ -132,11 +137,19 @@ exports.deletePhotos = async (request, response) => {
     where: {id: id}
   })
   .then((photos) => { 
-    response.status(200).send({
-      status: 'Success',
-      message: `Photo with ID ${id} deleted`,
-      data: photos,
-    })
+    if (photos) {
+      response.status(200).send({
+        status: 'Success',
+        message: `Photo with ID ${id} deleted`,
+        data: photos
+      })
+    } 
+    else {
+      response.status(404).send({
+        status: 'Failure',
+        message: 'Photo Not Found'
+      })
+    }
   })
   .catch((error) => {
     response.status(500).send({
