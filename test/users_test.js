@@ -37,8 +37,14 @@ describe('GET /routes/users', () => {
 
   it('Validate: Database Retrieval', async () => {
     // Setup
-    
-    const excerciseUrl = '/route/users'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
+   
+    const idResponse = await request(app)
+      .post(setupUrl)
+
+    const userId = idResponse._body.data.id
+
+    const excerciseUrl = `/route/users/${userId}`
     const expected = 'User_Test'
 
     // Exercise
@@ -46,9 +52,15 @@ describe('GET /routes/users', () => {
         .get(excerciseUrl)
 
     const result = response._body.data[0].name
-
     // Verify
+
     assert.equal(result, expected)
+
+    //Teardown
+    const teardownUrl = `/route/users/${userId}`
+ 
+    await request(app)
+        .delete(teardownUrl)
   })
 });
 
@@ -86,7 +98,7 @@ describe('GET /routes/users/:id', () => {
 
   it('Validate: Database Retrieval', async () => {
     // Setup
-    const setupUrl = '/route/users/?name=User_Test&url=fie://User_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
    
     const idResponse = await request(app)
       .post(setupUrl)
@@ -94,7 +106,7 @@ describe('GET /routes/users/:id', () => {
     const userId = idResponse._body.data.id
 
     const excerciseUrl = `/route/users/${userId}`
-    const expected = 'user_Test'
+    const expected = 'User_Test'
 
     // Exercise
     const response = await request(app)
@@ -113,11 +125,11 @@ describe('GET /routes/users/:id', () => {
   })
 })
 
-//Test: Post /route/users/:id
-describe('POST /route/users/:id', () => {
+//Test: Post /route/users/
+describe('POST /route/users/', () => {
   it('status_code: 201', async () => { 
     // Setup
-    const excerciseUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const excerciseUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     const expected = 201
 
     // Exercise
@@ -139,7 +151,7 @@ describe('POST /route/users/:id', () => {
 
   it('Status: Success', async () => {  
     // Setup
-    const excerciseUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const excerciseUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     const expected = 'Success'
 
     // Exercise
@@ -161,8 +173,8 @@ describe('POST /route/users/:id', () => {
   
   it('Validate: Database Retrieval', async () => { 
     // Setup
-    const excerciseUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
-    const expected = 'user_Test'
+    const excerciseUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
+    const expected = 'User_Test'
 
     // Exercise
     const response = await request(app)
@@ -186,14 +198,14 @@ describe('POST /route/users/:id', () => {
 describe('PUT /routes/users/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
-    const setupUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const userId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/users/${userId}?name=user_Test_2&url=fie://user_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/users/${userId}?name=User_Test_2&email=user.test.2@testdomain.com&password=P@ssw0rd`
     const expected = 200
 
     // Exercise
@@ -214,14 +226,14 @@ describe('PUT /routes/users/:id', () => {
 
   it('Status: Success', async () => {    
     // Setup
-    const setupUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const userId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/users/${userId}?name=user_Test_2&url=fie://user_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/users/${userId}?name=User_Test_2&email=user.test.2@testdomain.com&password=P@ssw0rd`
     const expected = 'Success'
 
     // Exercise
@@ -242,14 +254,14 @@ describe('PUT /routes/users/:id', () => {
 
   it('Validate: Database Retrieval', async () => {     
     // Setup
-    const setupUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const userId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/users/${userId}?name=user_Test_2&url=fie://user_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/users/${userId}?name=User_Test_2&email=user.test.2@testdomain.com&password=P@ssw0rd`
     const expected = 1
 
     // Exercise
@@ -273,14 +285,14 @@ describe('PUT /routes/users/:id', () => {
 describe('DELETE /routes/users/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
-    const setupUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const userId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/users/${userId}?name=user_Test_2&url=fie://user_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/users/${userId}`
     const expected = 200
 
     // Exercise
@@ -295,14 +307,14 @@ describe('DELETE /routes/users/:id', () => {
 
   it('Status: Success', async () => {  
     // Setup
-    const setupUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const userId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/users/${userId}?name=user_Test_2&url=fie://user_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/users/${userId}`
     const expected = 'Success'
 
     // Exercise
@@ -318,21 +330,21 @@ describe('DELETE /routes/users/:id', () => {
   it('Validate: Database Retrieval', async () => {
         
     // Setup
-    const setupUrl = '/route/users/?name=user_Test&url=fie://user_Test&citation=Daisy Rue Cox'
+    const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
     
     const idResponse = await request(app)
       .post(setupUrl)
 
     const userId = idResponse._body.data.id
 
-    const excerciseUrl = `/route/users/${userId}?name=user_Test_2&url=fie://user_Test_2&citation=Daisy Rue Cox`
+    const excerciseUrl = `/route/users/${userId}`
     const expected = '1'
 
     // Exercise
     const response = await request(app)
       .delete(excerciseUrl)
 
-      const result = response._body.data
+    const result = response._body.data
 
     // Verify
     assert.equal(result, expected)
@@ -341,69 +353,57 @@ describe('DELETE /routes/users/:id', () => {
 
 //Test: Post /route/login
 describe('POST /route/login', () => {
-    it('status_code: 201', async () => { 
-      // Setup
-      const excerciseUrl = '/route/login'
-      const expected = 201
+  it('status_code: 201', async () => { 
+    // Setup
+    const excerciseUrl = '/route/login'
+    const expected = 201
   
-      // Exercise
-      const response = await request(app)
-        .post(excerciseUrl)
+    // Exercise
+    const response = await request(app)
+      .post(excerciseUrl)
   
-      const result = response.status
-      const userId = response._body.data.id
+    const result = response.status
+    const userId = response._body.data.id
   
-      // Verify
+    // Verify
+    assert.equal(result, expected)
+  
+    //Teardown
+  })
+
+  it('Status: Success', async () => {  
+    // Setup
+    const excerciseUrl = '/route/login'
+    const expected = 'Success'
+  
+    // Exercise
+    const response = await request(app)
+      .post(excerciseUrl)
+  
+    const result = response._body.status
+    const userId = response._body.data.id
+  
+    // Verify
       assert.equal(result, expected)
   
-      //Teardown
-      const teardownUrl = `/route/login`
-   
-      await request(app)
-        .delete(teardownUrl)
-    })
-  
-    it('Status: Success', async () => {  
-      // Setup
-      const excerciseUrl = '/route/login'
-      const expected = 'Success'
-  
-      // Exercise
-      const response = await request(app)
-        .post(excerciseUrl)
-  
-      const result = response._body.status
-      const userId = response._body.data.id
-  
-      // Verify
-      assert.equal(result, expected)
-  
-      //Teardown
-      const teardownUrl = `/route/login`
-   
-      await request(app)
-        .delete(teardownUrl)
-    })  
+    //Teardown
+  })
     
-    it('Validate: Database Retrieval', async () => { 
-      // Setup
-      const excerciseUrl = '/route/login'
-      const expected = 'user_Test'
+  it('Validate: Database Retrieval', async () => { 
+    // Setup
+    const excerciseUrl = '/route/login'
+    const expected = 'user_Test'
   
-      // Exercise
-      const response = await request(app)
-        .post(excerciseUrl)
+    // Exercise
+    const response = await request(app)
+      .post(excerciseUrl)
   
-      const result = response._body.data.name
-      const userId = response._body.data.id
+    const result = response._body.data.name
+    const userId = response._body.data.id
   
-      // Verify
-      assert.equal(result, expected)
+    // Verify
+    assert.equal(result, expected)
   
-      //Teardown
-      const teardownUrl = `/route/login`
-   
-      await request(app)
-        .delete(teardownUrl)
-    })
-  });
+    //Teardown
+  })  
+})

@@ -9,8 +9,9 @@ const {
     getUsers,
     getUsersById,
     addUser,
-    addLogin,
-    updateUsers
+    updateUsers,
+    deleteUsers,
+    addLogin
 } = require('../service/RoutesusersService.js');
 
 //Envelope API Routes
@@ -67,23 +68,6 @@ usersApi.get('/:id', getUsersById);
 usersApi.post('/', addUser);
 
 /** 
-  /routes/users/login:
-    summary: User Logins
-    description: URL to Logins
-    post:
-      tags:
-      - /routes/users
-      summary: Add Login
-      description: Add Login
-      operationId: addLogin
-      responses:
-        default:
-          description: Default error sample response
-      x-swagger-router-controller: Routesusers
-**/
-usersApi.post('/login', addLogin);
-
-/** 
   /routes/users/:id:
     summary: Users by Id
     description: URL to Users by Id
@@ -100,6 +84,28 @@ usersApi.post('/login', addLogin);
 **/
 usersApi.put('/:id', updateUsers);
 
+/**
+  /routes/users/:id:
+    NEED SWAGGER CODE
+**/
+usersApi.delete('/:id', deleteUsers)
+
+/** 
+  /routes/users/login:
+    summary: User Logins
+    description: URL to Logins
+    post:
+      tags:
+      - /routes/users
+      summary: Add Login
+      description: Add Login
+      operationId: addLogin
+      responses:
+        default:
+          description: Default error sample response
+      x-swagger-router-controller: Routesusers
+**/
+usersApi.post('/login', addLogin);
 
 //Export API
 module.exports = usersApi;
