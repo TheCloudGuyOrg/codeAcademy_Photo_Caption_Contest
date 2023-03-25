@@ -4,7 +4,7 @@ const assert = require('assert')
 const app = require('../index.js')
 
 //Test: GET /route/photos
-describe('GET /routes/photos', () => {
+describe('GET /route/photos', () => {
   it('status_code: 200', async () => {
     // Setup
     const excerciseUrl = '/route/photos'
@@ -65,7 +65,7 @@ describe('GET /routes/photos', () => {
 });
 
 //Test: GET /route/photos/:id
-describe('GET /routes/photos/:id', () => {
+describe('GET /route/photos/:id', () => {
   it('status_code: 200', async () => {
     // Setup
     const excerciseUrl = '/route/photos/1'
@@ -195,7 +195,7 @@ describe('POST /route/photos/:id', () => {
 });
 
 //Test: PUT /route/photos/:id
-describe('PUT /routes/photos/:id', () => {
+describe('PUT /route/photos/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
     const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'
@@ -282,7 +282,7 @@ describe('PUT /routes/photos/:id', () => {
 })
 
 //Test: DELETE /route/photos/:id
-describe('DELETE /routes/photos/:id', () => {
+describe('DELETE /route/photos/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
     const setupUrl = '/route/photos/?name=Photo_Test&url=file://Photo_Test&citation=Daisy Rue Cox'

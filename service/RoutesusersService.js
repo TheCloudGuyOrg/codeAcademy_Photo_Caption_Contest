@@ -15,18 +15,18 @@ exports.getUsers = async (request, response) => {
         ['createdAt', 'ASC'],
     ]
   })
-.then((users) => { 
-  response.status(200).send({
-    status: 'Success',
-    message: 'Photo Information retrieved',
-    data: users,
+  .then((users) => { 
+    response.status(200).send({
+      status: 'Success',
+      message: 'User Information retrieved',
+      data: users,
+    })
   })
-})
-.catch((error) => {
-  response.status(500).send({
-    error: error.message
+  .catch((error) => {
+    response.status(500).send({
+      error: error.message
+    })
   })
-})
 }
 
 

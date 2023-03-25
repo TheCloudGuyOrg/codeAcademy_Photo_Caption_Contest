@@ -13,10 +13,10 @@ const {
     deletePhotos,
 } = require('../service/RoutesphotosService.js');
 
-//Envelope API Routes
+//Photo API Routes
 
 /**
-  /routes/photos/:
+  /route/photos/:
     summary: Photos Root
     description: Photos Root
     get:
@@ -33,7 +33,7 @@ const {
 photosApi.get('/', getPhotos);
 
 /**
-  /routes/photos/:id:
+  /route/photos/:id:
     summary: Photos by ID
     description: URL to Photos by Id
     get:
@@ -50,7 +50,7 @@ photosApi.get('/', getPhotos);
 photosApi.get('/:id', getPhotosById);
 
 /**
-  /routes/photos/:
+  /route/photos/:
     summary: Photos Root
     description: Photos Root
     post:
@@ -67,7 +67,7 @@ photosApi.get('/:id', getPhotosById);
 photosApi.post('/', addPhotos);
 
 /**
-  /routes/photos/:id:
+  /route/photos/:id:
     summary: Photos by ID
     description: URL to Photos by Id
     put:
@@ -84,7 +84,7 @@ photosApi.post('/', addPhotos);
 photosApi.put('/:id', updatePhotos);
 
 /**
-  /routes/photos/:id:
+  /route/photos/:id:
     summary: Photos by ID
     description: URL to Photos by Id
     delete:

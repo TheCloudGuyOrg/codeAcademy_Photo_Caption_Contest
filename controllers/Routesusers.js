@@ -14,10 +14,10 @@ const {
     addLogin
 } = require('../service/RoutesusersService.js');
 
-//Envelope API Routes
+//User API Routes
 
 /** 
-  /routes/users/:
+  /route/users/:
     summary: Users Root
     description: Root of the users URL
     get:
@@ -34,7 +34,7 @@ const {
 usersApi.get('/', getUsers);
 
 /** 
-  /routes/users/:id:
+  /route/users/:id:
     summary: Users by Id
     description: URL to Users by Id
     get:
@@ -51,7 +51,7 @@ usersApi.get('/', getUsers);
 usersApi.get('/:id', getUsersById);
 
 /** 
-  /routes/users/:
+  /route/users/:
     summary: Users Root
     description: Root of the users URL
     post:
@@ -68,7 +68,7 @@ usersApi.get('/:id', getUsersById);
 usersApi.post('/', addUser);
 
 /** 
-  /routes/users/:id:
+  /route/users/:id:
     summary: Users by Id
     description: URL to Users by Id
     put:
@@ -85,13 +85,13 @@ usersApi.post('/', addUser);
 usersApi.put('/:id', updateUsers);
 
 /**
-  /routes/users/:id:
+  /route/users/:id:
     NEED SWAGGER CODE
 **/
 usersApi.delete('/:id', deleteUsers)
 
 /** 
-  /routes/users/login:
+  /route/users/login:
     summary: User Logins
     description: URL to Logins
     post:

@@ -6,14 +6,21 @@ const captionApi = express.Router();
 
 //Import Queries
 const {
-    getCaptionById,
-    addCaption,
-    updateCaption,
-    deleteCaption
+  getCaption, 
+  getCaptionById,
+  addCaption,
+  updateCaption,
+  deleteCaption
 } = require('../service/RoutescaptionsService.js');
 
 
-//Envelope API Routes
+//Captions API Routes
+
+/**
+  /routes/captions/:
+    NEED SWAGGER CODE
+**/
+captionApi.get('/', getCaption);
 
 /**
   /routes/captions/:id:

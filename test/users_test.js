@@ -4,7 +4,7 @@ const assert = require('assert')
 const app = require('../index.js')
 
 //Test: GET /route/users
-describe('GET /routes/users', () => {
+describe('GET /route/users', () => {
   it('status_code: 200', async () => {
     // Setup
     const excerciseUrl = '/route/users'
@@ -65,7 +65,7 @@ describe('GET /routes/users', () => {
 });
 
 //Test: GET /route/users/:id
-describe('GET /routes/users/:id', () => {
+describe('GET /route/users/:id', () => {
   it('status_code: 200', async () => {
     // Setup
     const excerciseUrl = '/route/users/1'
@@ -195,7 +195,7 @@ describe('POST /route/users/', () => {
 });
 
 //Test: PUT /route/users/:id
-describe('PUT /routes/users/:id', () => {
+describe('PUT /route/users/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
     const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
@@ -282,7 +282,7 @@ describe('PUT /routes/users/:id', () => {
 })
 
 //Test: DELETE /route/users/:id
-describe('DELETE /routes/users/:id', () => {
+describe('DELETE /route/users/:id', () => {
   it('status_code: 200', async () => { 
     // Setup
     const setupUrl = '/route/users/?name=User_Test&email=user.test@testdomain.com&password=P@ssw0rd'
