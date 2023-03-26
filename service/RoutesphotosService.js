@@ -1,21 +1,22 @@
 'use strict';
-//Imports
+//Import DB Modules
 const models = require('../database/models');
 const Photo = models.photos
 
+//Import Cache
+const CacheService = require('../database/cache/node-cache.js')
+const ttl = 60 * 60 * 1 //cache for 1 Hour
+const cache = new CacheService(ttl)
+const cache_key = 'photos'
 
-/**
- * Get List of Photos
- * Get a List of Photos
- *
- * no response value expected for this operation
- **/
+//Get Photos
 exports.getPhotos = async (request, response) => {
-  return await Photo.findAll({
+  return await cache.get(`${cache_key}`, () =>
+    Photo.findAll({
       order: [
           ['id', 'ASC'],
       ]
-  })
+  }))
   .then((photos) => { 
     response.status(200).send({
       status: 'Success',
@@ -31,21 +32,17 @@ exports.getPhotos = async (request, response) => {
 }
 
 
-/**
- * Get Photos by Id
- * Get Photos by Id
- *
- * no response value expected for this operation
- **/
+//Get Photos by Id
 exports.getPhotosById = async (request, response) => {
   const id = parseInt(request.params.id)
 
-  return await Photo.findAll({
-    where: {id: id},
-    order: [
-        ['id', 'ASC'],
-    ]
-  })
+  return await cache.get(`${cache_key}_${id}`, () =>
+    Photo.findAll({
+      where: {id: id},
+        order: [
+          ['id', 'ASC'],
+      ]
+  }))
   .then((photos) => { 
     if (!photos) {
       response.status(404).send({
@@ -66,12 +63,7 @@ exports.getPhotosById = async (request, response) => {
 }
 
 
-/**
- * Add Photo
- * Add Photo
- *
- * no response value expected for this operation
- **/
+//Add Photos
 exports.addPhotos = async (request, response) => {
   return await Photo.create({
     name: request.query.name,
@@ -93,12 +85,7 @@ exports.addPhotos = async (request, response) => {
 }
 
 
-/**
- * Update Photo
- * Update Photo
- *
- * no response value expected for this operation
- **/
+//Update Photos
 exports.updatePhotos = async (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -124,12 +111,7 @@ exports.updatePhotos = async (request, response) => {
 }
 
 
-/**
- * Delete Photo
- * Delete Photo
- *
- * no response value expected for this operation
- **/
+//Delete Photos
 exports.deletePhotos = async (request, response) => {
   const id = parseInt(request.params.id)
   

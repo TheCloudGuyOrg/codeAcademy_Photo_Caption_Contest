@@ -1,21 +1,22 @@
 'use strict';
-//Imports
+//Import DB Modules
 const models = require('../database/models');
 const Caption = models.caption;
 
+//Import Cache
+const CacheService = require('../database/cache/node-cache.js')
+const ttl = 60 * 60 * 1 //cache for 1 Hour
+const cache = new CacheService(ttl)
+const cache_key = 'captions'
 
-/**
- * Get List of Captions
- * Get List of Captions
- *
- * no response value expected for this operation
- **/
+//Get Caption
 exports.getCaption = async (request, response) => {
-  return await Caption.findAll({
-    order: [
+  return await cache.get(`${cache_key}`, () =>
+    Caption.findAll({
+      order: [
         ['createdAt', 'ASC'],
-    ]
-  })
+      ]
+  }))
   .then((captions) => { 
     response.status(200).send({
       status: 'Success',
@@ -31,21 +32,17 @@ exports.getCaption = async (request, response) => {
 }
 
 
-/**
- * Get Caption by Id
- * Get Caption by Id
- *
- * no response value expected for this operation
- **/
+//Get Caption by Id
 exports.getCaptionById = async (request, response) => {
   const id = parseInt(request.params.id)
 
-  return await Caption.findAll({
-    where: {id: id},
-    order: [
+  return await cache.get(`${cache_key}_${id}`, () =>
+    Caption.findAll({
+      where: {id: id},
+      order: [
         ['id', 'ASC'],
-    ]
-  })
+      ]
+  }))
   .then((captions) => { 
     if (!captions) {
       response.status(404).send({
@@ -65,13 +62,7 @@ exports.getCaptionById = async (request, response) => {
   })
 }
 
-
-/**
- * Add Caption
- * Add Caption
- *
- * no response value expected for this operation
- **/
+//Add Caption
 exports.addCaption = async (request, response) => {
   return await Caption.create({
     photo_id: request.query.photo_id,
@@ -93,12 +84,7 @@ exports.addCaption = async (request, response) => {
 }
 
 
-/**
- * Update Caption
- * Update Caption
- *
- * no response value expected for this operation
- **/
+//Update Caption
 exports.updateCaption = async (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -124,12 +110,7 @@ exports.updateCaption = async (request, response) => {
 }
 
 
-/**
- * Delete Caption
- * Delete Caption
- *
- * no response value expected for this operation
- **/
+//Delete Caption
 exports.deleteCaption = async (request, response) => {
   const id = parseInt(request.params.id)
   

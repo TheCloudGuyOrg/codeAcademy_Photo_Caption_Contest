@@ -1,20 +1,22 @@
 'use strict';
-//Imports
+//Import DB Modules
 const models = require('../database/models');
 const User = models.user
 
-/**
- * Get List of Users
- * Get List of Users
- *
- * no response value expected for this operation
- **/
+//Import Cache
+const CacheService = require('../database/cache/node-cache.js')
+const ttl = 60 * 60 * 1 //cache for 1 Hour
+const cache = new CacheService(ttl)
+const cache_key = 'users'
+
+//Get Users
 exports.getUsers = async (request, response) => {
-  return await User.findAll({
-    order: [
-        ['createdAt', 'ASC'],
-    ]
-  })
+  return await cache.get(`${cache_key}`, () =>
+    User.findAll({
+      order: [
+          ['createdAt', 'ASC'],
+      ]
+  }))
   .then((users) => { 
     response.status(200).send({
       status: 'Success',
@@ -30,21 +32,17 @@ exports.getUsers = async (request, response) => {
 }
 
 
-/**
- * Get Users by Id
- * Get Users by Id
- *
- * no response value expected for this operation
- **/
+//Get Users by Id
 exports.getUsersById = async (request, response) => {
   const id = parseInt(request.params.id)
 
-  return await User.findAll({
-    where: {id: id},
-    order: [
+  return await cache.get(`${cache_key}_${id}`, () =>
+    User.findAll({
+      where: {id: id},
+      order: [
         ['id', 'ASC'],
-    ]
-  })
+      ]
+  }))
   .then((users) => { 
     if (!users) {
       response.status(404).send({
@@ -65,12 +63,7 @@ exports.getUsersById = async (request, response) => {
 }
 
 
-/**
- * Add User
- * Add User
- *
- * no response value expected for this operation
- **/
+//Add Users
 exports.addUser = async (request, response) => {
   return await User.create({
     name: request.query.name,
@@ -92,12 +85,7 @@ exports.addUser = async (request, response) => {
 }
 
 
-/**
- * Update Users
- * Update Users
- *
- * no response value expected for this operation
- **/
+//Update Users
 exports.updateUsers = async (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -122,12 +110,7 @@ exports.updateUsers = async (request, response) => {
   })
 }
 
-/**
- * Delete Users
- * Delete Users
- *
- * no response value expected for this operation
- **/
+//Delete Users
 exports.deleteUsers = async (request, response) => {
   const id = parseInt(request.params.id)
   
@@ -157,12 +140,7 @@ exports.deleteUsers = async (request, response) => {
 }
 
 
-/**
- * Add Login
- * Add Login
- *
- * no response value expected for this operation
- **/
+//Add Login
 exports.addLogin = async (request, response) => {
 
 }
