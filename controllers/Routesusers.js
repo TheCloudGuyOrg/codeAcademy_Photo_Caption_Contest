@@ -86,7 +86,16 @@ usersApi.put('/:id', updateUsers);
 
 /**
   /route/users/:id:
-    NEED SWAGGER CODE
+    delete:
+      tags:
+      - /route/users
+      summary: Delete User
+      description: Delete User
+      operationId: deleteUsers
+      responses:
+        default:
+          description: Default error sample response
+      x-swagger-router-controller: Routesuser
 **/
 usersApi.delete('/:id', deleteUsers)
 

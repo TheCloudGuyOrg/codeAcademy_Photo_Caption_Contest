@@ -17,18 +17,29 @@ const {
 //Captions API Routes
 
 /**
-  /routes/captions/:
-    NEED SWAGGER CODE
+  /route/captions/:
+    summary: Captions Root
+    description: Root of the captions URL
+    get:
+      tags:
+      - /route/captions
+      summary: Get List of Captions
+      description: Get a List of Captions
+      operationId: getCaptions
+      responses:
+        default:
+          description: Default error sample response
+      x-swagger-router-controller: Routescaptions
 **/
 captionApi.get('/', getCaption);
 
 /**
-  /routes/captions/:id:
+  /route/captions/:id:
     summary: Captions by Id
     description: URL to Captions by Id
     get:
       tags:
-      - /routes/captions
+      - /route/captions
       summary: Get Caption by Id
       description: Get Caption by Id
       operationId: getCaptionById
@@ -40,12 +51,12 @@ captionApi.get('/', getCaption);
 captionApi.get('/:id', getCaptionById);
 
 /** 
-  /routes/captions/:
+  /route/captions/:
     summary: Captions Root
     description: Root of the captions URL
     post:
       tags:
-      - /routes/captions
+      - /route/captions
       summary: Add Caption
       description: Add Caption
       operationId: addCaption
@@ -57,12 +68,12 @@ captionApi.get('/:id', getCaptionById);
 captionApi.post('/', addCaption);
 
 /**
-  /routes/captions/:id:
+  /route/captions/:id:
     summary: Captions by Id
     description: URL to Captions by Id
     put:
       tags:
-      - /routes/captions
+      - /route/captions
       summary: Update Caption
       description: Update Caption
       operationId: updateCaption
@@ -74,12 +85,12 @@ captionApi.post('/', addCaption);
 captionApi.put('/:id', updateCaption);
 
 /**
-  /routes/captions/:id:
+  /route/captions/:id:
     summary: Captions by Id
     description: URL to Captions by Id
     delete:
       tags:
-      - /routes/captions
+      - /route/captions
       summary: Delete Caption
       description: Delete Caption
       operationId: deleteCaption
