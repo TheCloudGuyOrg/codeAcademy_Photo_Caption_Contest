@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "connect": "^3.2.0",
+    "express-session": "^1.17.3",
     "js-yaml": "^3.3.0",
     "npm-check-updates": "^16.7.12",
     "oas3-tools": "^2.2.3",

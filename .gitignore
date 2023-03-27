@@ -5,6 +5,9 @@ _caption-contest-solution
 database/dbconfig.js
 database/database.json
 
+#Varaibles 
+var.js
+
 # Node Modules
 node_modules/
 

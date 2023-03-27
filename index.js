@@ -9,6 +9,26 @@ const oas3Tools = require('oas3-tools');
 const express = require('express');
 const app = express();
 
+
+//Defining User Sessions
+const { SESSION_SECRET } = require('./var.js')
+const session = require('express-session')
+const store = new session.MemoryStore() //Dev Only Move to DB for Prod Sessions
+
+app.use(
+    session({
+        secret: SESSION_SECRET, 
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, //24 Hour Cookie Expiration
+            secure: true,
+            sameSite: "none"
+        },
+        resave: false,
+        saveUninitialized: false,
+        store
+    })
+)
+
 //photosRouter
 const photosRouter = require("./controllers/Routesphotos.js");
 app.use("/route/photos", photosRouter);
