@@ -10,8 +10,7 @@ const {
     getUsersById,
     addUser,
     updateUsers,
-    deleteUsers,
-    addLogin
+    deleteUsers
 } = require('../service/RoutesusersService.js');
 
 //User API Routes
@@ -98,23 +97,6 @@ usersApi.put('/:id', updateUsers);
       x-swagger-router-controller: Routesuser
 **/
 usersApi.delete('/:id', deleteUsers)
-
-/** 
-  /route/users/login:
-    summary: User Logins
-    description: URL to Logins
-    post:
-      tags:
-      - /routes/users
-      summary: Add Login
-      description: Add Login
-      operationId: addLogin
-      responses:
-        default:
-          description: Default error sample response
-      x-swagger-router-controller: Routesusers
-**/
-usersApi.post('/login', addLogin);
 
 //Export API
 module.exports = usersApi;

@@ -455,17 +455,4 @@ paths:
         default:
           description: Default error sample response
       x-swagger-router-controller: Routesuser
-  /route/users/login:
-    summary: User Logins
-    description: URL to Logins
-    post:
-      tags:
-        - /route/users
-      summary: Add Login
-      description: Add Login
-      operationId: addLogin
-      responses:
-        default:
-          description: Default error sample response
-      x-swagger-router-controller: Routesusers
 components: {}

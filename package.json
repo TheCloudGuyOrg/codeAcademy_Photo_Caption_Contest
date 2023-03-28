@@ -36,6 +36,8 @@
     "js-yaml": "^3.3.0",
     "npm-check-updates": "^16.7.12",
     "oas3-tools": "^2.2.3",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4"
   }

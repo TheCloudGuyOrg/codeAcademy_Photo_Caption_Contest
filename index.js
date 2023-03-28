@@ -1,33 +1,14 @@
 'use strict';
-
-//Import Modules
-const path = require('path');
-const http = require('http');
-const oas3Tools = require('oas3-tools');
-
 //Use Express
 const express = require('express');
 const app = express();
 
-
-//Defining User Sessions
-const { SESSION_SECRET } = require('./var.js')
-const session = require('express-session')
-const store = new session.MemoryStore() //Dev Only Move to DB for Prod Sessions
-
-app.use(
-    session({
-        secret: SESSION_SECRET, 
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24, //24 Hour Cookie Expiration
-            secure: true,
-            sameSite: "none"
-        },
-        resave: false,
-        saveUninitialized: false,
-        store
-    })
-)
+//authRouter
+const authRouter = require("./auth/auth.js")
+app.use("/login", authRouter)
+app.use("/profile", authRouter)
+app.use("/register", authRouter)
+app.use("/logout", authRouter)
 
 //photosRouter
 const photosRouter = require("./controllers/Routesphotos.js");
@@ -42,6 +23,10 @@ const usersRouter = require("./controllers/Routesusers.js");
 app.use("/route/users", usersRouter);
 
 //swaggerRouter configuration
+const path = require('path');
+const http = require('http');
+const oas3Tools = require('oas3-tools');
+
 const options = {
     routing: {
         controllers: path.join(__dirname, './controllers')
