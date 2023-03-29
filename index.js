@@ -3,12 +3,40 @@
 const express = require('express');
 const app = express();
 
+//Defining User Sessions 
+const session = require('express-session')
+const { SESSION_SECRET } = require('./var.js')
+const storeSession = new session.MemoryStore() //Dev Only Move to DB for Prod Sessions
+
+app.use(
+    session({
+        secret: SESSION_SECRET, 
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, //24 Hour Cookie Expiration
+            secure: true,
+            sameSite: "none"
+        },
+        resave: false,
+        saveUninitialized: false,
+        storeSession
+    })
+)
+
+//Use Passport
+const passport = require("passport");
+require("./auth/passport");
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("/", (req, res) => {
+    const user = req.user || "Guest";
+    res.render("home", { user });
+});
+
 //authRouter
-const authRouter = require("./auth/auth.js")
-app.use("/login", authRouter)
-app.use("/profile", authRouter)
-app.use("/register", authRouter)
-app.use("/logout", authRouter)
+const authRouter = require("./controllers/Routesauth.js");
+app.use("/users", authRouter);
 
 //photosRouter
 const photosRouter = require("./controllers/Routesphotos.js");
@@ -48,8 +76,6 @@ app.listen(serverPort, () => {
 http.createServer(swaggerApp).listen(swaggerPort, function () {
     console.log('Swagger-ui is available on (http://localhost:%d/docs)', swaggerPort);
 });
-
-//Close Ports
 
 //Export App
 module.exports = app;
