@@ -2,6 +2,11 @@
 const express = require("express");
 const authApi = express.Router();
 
+//Import Queries
+const {
+    getUsersById
+} = require('../service/RoutesusersService.js');
+
 
 //Defining User Sessions
 const { SESSION_SECRET } = require('../var.js')
@@ -21,7 +26,29 @@ authApi.use(
     })
 )
 
-//Authentication - Move to Seperate File
+// Validate bcrypt hash
+const bcrypt = require("bcrypt");
+const comparePasswords = async (password, hash) => {
+    try {
+      const matchFound = await bcrypt.compare(password, hash);
+      return matchFound;
+    } catch (err) {
+      console.log(err);
+    }
+      return false;
+  };
+
+// Validate Authenticated Function
+function ensureAuthentication(request, response, next) {
+    if (request.session.authenticated) {
+      return next();
+    } else {
+      response.status(403).json({ msg: "You're not authorized to view this page" });
+    }
+  }
+  
+
+//Configure Passport Authentication 
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -56,14 +83,7 @@ passport.use(new LocalStrategy(
     })
   );
 
-function ensureAuthentication(request, response, next) {
-    if (request.session.authenticated) {
-      return next();
-    } else {
-      response.status(403).json({ msg: "You're not authorized to view this page" });
-    }
-  }
-
+//Configuring Authentication Routes
 authApi.get("/login", (req, res) => {
     res.render("login");
   });
@@ -80,8 +100,31 @@ authApi.post("/login",
   }
 );
 
-authApi.post("/login", (req, res) => {
+authApi.post("/login", async (req, res) => {
     const { username, password } = req.body;
+    const id = parseInt(request.params.id)
+
+    try {
+        const user = await getUsersById(id)
+
+        if (!user) {
+            console.log("User does not exist!");
+            return res.redirect("login");
+          }
+
+        const matchedPassword = await bcrypt.compare(password, user.password);
+
+        if (!matchedPassword) {
+            console.log("Passwords did not match!");
+            return res.redirect("login");
+        }
+
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
     db.users.findByUsername(username, (err, user) => {
       if (!user) return res.status(403).json({ msg: "No user found!" });
       if (user.password === password) {
@@ -95,7 +138,7 @@ authApi.post("/login", (req, res) => {
         res.status(403).json({ msg: "Bad Credentials" });
       }
     });
-  });
+
 
 authApi.get("/register", (req, res) => {
     res.render("register");
@@ -103,17 +146,29 @@ authApi.get("/register", (req, res) => {
 
 authApi.post("/register", async (req, res) => {
     const { username, password } = req.body;
-    // imported helper function: 
-    // db.users.addUser
-    const newUser = await db.users.createUser({ username, password })
-    if (newUser) {
-        res.status(201).json({
-          msg: `User ${username} has been created`,
-          newUser
-        })
-    } 
-    else {
-        res.status(500).json({ msg: "Failed to create user" });
+    const id = parseInt(request.params.id)
+
+    try {
+        const user = await getUsersById(id)
+
+        if(user) {
+            console.log(`User ${user} already exists!`)
+            return res.redirect('login')
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newUser = {
+            name: req.query.name,
+            email: req.query.email,
+            password: hash
+        }
+        await users.push(newUser);
+        res.redirect("login");
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
     }
   })
 

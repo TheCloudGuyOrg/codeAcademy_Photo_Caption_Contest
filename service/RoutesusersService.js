@@ -9,6 +9,9 @@ const ttl = 60 * 60 * 1 //cache for 1 Hour
 const cache = new CacheService(ttl)
 const cache_key = 'users'
 
+//Import bcrypt
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 //Get Users
 exports.getUsers = async (request, response) => {
@@ -65,11 +68,12 @@ exports.getUsersById = async (request, response) => {
 
 
 //Add Users
-exports.addUser = async (request, response) => {
+exports.addUser = (request, response) => {
+ bcrypt.hash(request.query.password, saltRounds, async function (err, hash) {
   return await User.create({
     name: request.query.name,
     email: request.query.email,
-    password: request.query.password
+    password: hash
   })
   .then((users) => { 
     response.status(201).send({
@@ -83,30 +87,33 @@ exports.addUser = async (request, response) => {
       error: error.message
     })
   })
+ })
 }
 
 
 //Update Users
-exports.updateUsers = async (request, response) => {
-  const id = parseInt(request.params.id)
+exports.updateUsers = (request, response) => {
+  bcrypt.hash(request.query.password, saltRounds, async function (err, hash) {
+    const id = parseInt(request.params.id)
 
-  return await User.update({
-    name: request.query.name,
-    email: request.query.url,
-    password: request.query.citation
-  },{
-    where: {id: id}
-  })
-  .then((users) => { 
-    response.status(200).send({
-      status: 'Success',
-      message: `User with ID ${id} updated`,
-      data: users
+    return await User.update({
+      name: request.query.name,
+      email: request.query.url,
+      password: hash
+    },{
+      where: {id: id}
     })
-  })
-  .catch((error) => {
-    response.status(500).send({
-      error: error.message
+    .then((users) => { 
+      response.status(200).send({
+        status: 'Success',
+        message: `User with ID ${id} updated`,
+        data: users
+      })
+    })
+    .catch((error) => {
+      response.status(500).send({
+        error: error.message
+      })
     })
   })
 }
