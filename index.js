@@ -7,7 +7,6 @@ const SESSION_SECRET = process.env.SESSION_SECRET
 //Use Express
 const express = require('express');
 const app = express();
-dotenv.config()
 
 //Defining User Sessions 
 const session = require('express-session')
@@ -31,6 +30,9 @@ app.use(
 //Use Passport
 const passport = require("passport");
 require("./auth/passport");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
@@ -44,7 +46,7 @@ app.get("/", (req, res) => {
 
 //authRouter
 const authRouter = require("./controllers/Routesauth.js");
-app.use("/users", authRouter);
+app.use("/", authRouter);
 
 //photosRouter
 const photosRouter = require("./controllers/Routesphotos.js");

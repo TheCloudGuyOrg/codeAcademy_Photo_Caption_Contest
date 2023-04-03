@@ -5,44 +5,34 @@ const express = require("express");
 const authApi = express.Router();
 const passport = require("passport");
 
-//Import Queries
-const { getUsersById } = require('../service/RoutesusersService.js');
 
 //Authenication Routes
 authApi.post("/register", async (req, res) => {
-    const { username, password } = req.body;
-    const id = parseInt(request.params.id)
+    const username = req.body.username
+    const password  = req.body.password
 
+    const url = `http://localhost:3000/route/users/?name=${username}&email=${username}@testdomain.com&password=${password}`
+    
     try {
-        const user = await getUsersById(id) //FIX DB CALL
+      const user = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+          })
 
-        if(user) {
-            console.log(`User ${user} already exists!`)
-            return res.redirect('login')
+        if(user.status === 500) {
+          console.log(`User already exists!`)
+          return res.redirect('register')
         }
-
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        const newUser = {
-            name: req.query.name,
-            email: req.query.email,
-            password: hashedPassword
-        }
-
-        await users.push(newUser); //ADD NEW USER TO DB
-        res.redirect("login");
+        res.redirect("register"); 
     }
     catch (err) {
-        res.status(500).json({ 
-            message: err.message 
-        });
-    }
-  })
-
-authApi.get("/register", (req, res) => {
-    res.render("register");
-  });
+      res.status(500).json({ 
+          message: err.message 
+      });
+  }
+})
 
 authApi.post("/login",
   passport.authenticate("local", { failureRedirect : "/login"}),
@@ -50,6 +40,10 @@ authApi.post("/login",
     res.redirect("profile");
   }
 );
+
+authApi.get("/register", (req, res) => {
+    res.render("register");
+  });
 
 authApi.get("/login", (req, res) => {
     res.render("login");
