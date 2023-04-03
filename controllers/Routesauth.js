@@ -25,7 +25,7 @@ authApi.post("/register", async (req, res) => {
           console.log(`User already exists!`)
           return res.redirect('register')
         }
-        res.redirect("register"); 
+        res.redirect("/"); 
     }
     catch (err) {
       res.status(500).json({ 
@@ -40,6 +40,10 @@ authApi.post("/login",
     res.redirect("profile");
   }
 );
+
+authApi.get("/", (req, res) => {
+    res.render("home");
+});
 
 authApi.get("/register", (req, res) => {
     res.render("register");
@@ -58,6 +62,8 @@ authApi.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/login");
   });
+
+
 
 //Export API
 module.exports = authApi

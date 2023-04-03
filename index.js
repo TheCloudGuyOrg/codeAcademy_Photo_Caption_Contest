@@ -38,10 +38,6 @@ app.set("view engine", "ejs");
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req, res) => {
-    const user = req.user || "Guest";
-    res.render("home", { user });
-});
 
 //authRouter
 const authRouter = require("./controllers/Routesauth.js");
