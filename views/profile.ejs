@@ -1,0 +1,21 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="container">
+    <div class="span3 well">
+    <center>
+				<i class="bi bi-person-circle" style="font-size: 120px;"></i>
+        <h3><%= user ? user.username : "Guest" %></h3>
+				<p><strong>Bio: </strong><br>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+				<br>
+				<p>
+					<a href="#" class="btn btn-info btn-md">
+						<span class="glyphicon glyphicon-log-out"></span> Log out
+					</a>
+     		</p>
+		</center>
+    </div>
+</div>

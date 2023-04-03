@@ -31,6 +31,8 @@ app.use(
 //Use Passport
 const passport = require("passport");
 require("./auth/passport");
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 
 app.use(passport.initialize());
 app.use(passport.session());
