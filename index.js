@@ -1,11 +1,17 @@
 'use strict';
+//Import Varables
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config/.env" });
+const SESSION_SECRET = process.env.SESSION_SECRET
+
 //Use Express
 const express = require('express');
 const app = express();
+dotenv.config()
 
 //Defining User Sessions 
 const session = require('express-session')
-const { SESSION_SECRET } = require('./var.js')
+
 const storeSession = new session.MemoryStore() //Dev Only Move to DB for Prod Sessions
 
 app.use(
@@ -79,7 +85,3 @@ http.createServer(swaggerApp).listen(swaggerPort, function () {
 
 //Export App
 module.exports = app;
-
-
-
-
