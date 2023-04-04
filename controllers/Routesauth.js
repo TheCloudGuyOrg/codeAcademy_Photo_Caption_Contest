@@ -24,7 +24,7 @@ authApi.post("/register", async (request, response) => {
           console.log(`User already exists!`)
           return response.redirect('/')
         }
-        res.redirect("/"); 
+        response.redirect("/"); 
     }
     catch (error) {
       response.status(500).json({ 
