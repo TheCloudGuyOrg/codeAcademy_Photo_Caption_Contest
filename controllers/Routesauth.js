@@ -34,9 +34,9 @@ authApi.post("/register", async (request, response) => {
 })
 
 authApi.post("/login",
-  passport.authenticate("local", { failureRedirect : "/"}),
-  (req, res) => {
-    res.redirect("profile");
+  passport.authenticate("local", { failureRedirect : "/error"}),
+  (request, response) => {
+    response.redirect("/");
   }
 );
 
@@ -51,6 +51,10 @@ authApi.get("/register", (req, res) => {
 authApi.get("/login", (req, res) => {
     res.render("login");
   });
+
+  authApi.get("/error", (req, res) => {
+    res.render("error");
+});
 
 authApi.get("/profile", (req, res) => {
     res.render("profile", { user: req.user });
