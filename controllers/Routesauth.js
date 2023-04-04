@@ -5,11 +5,10 @@ const express = require("express");
 const authApi = express.Router();
 const passport = require("passport");
 
-
 //Authenication Routes
-authApi.post("/register", async (req, res) => {
-    const username = req.body.username
-    const password  = req.body.password
+authApi.post("/register", async (request, response) => {
+    const username = request.body.username
+    const password  = request.body.password
 
     const url = `http://localhost:3000/route/users/?name=${username}&email=${username}@testdomain.com&password=${password}`
     
@@ -23,19 +22,19 @@ authApi.post("/register", async (req, res) => {
 
         if(user.status === 500) {
           console.log(`User already exists!`)
-          return res.redirect('register')
+          return response.redirect('/')
         }
         res.redirect("/"); 
     }
-    catch (err) {
-      res.status(500).json({ 
-          message: err.message 
+    catch (error) {
+      response.status(500).json({ 
+          message: error.message 
       });
   }
 })
 
 authApi.post("/login",
-  passport.authenticate("local", { failureRedirect : "/login"}),
+  passport.authenticate("local", { failureRedirect : "/"}),
   (req, res) => {
     res.redirect("profile");
   }
@@ -62,7 +61,6 @@ authApi.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/login");
   });
-
 
 
 //Export API

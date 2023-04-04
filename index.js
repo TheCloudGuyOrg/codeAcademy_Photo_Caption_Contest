@@ -8,9 +8,12 @@ const SESSION_SECRET = process.env.SESSION_SECRET
 const express = require('express');
 const app = express();
 
+//Use Helmet
+const helmet = require('helmet');
+app.use(helmet());
+
 //Defining User Sessions 
 const session = require('express-session')
-
 const storeSession = new session.MemoryStore() //Dev Only Move to DB for Prod Sessions
 
 app.use(
