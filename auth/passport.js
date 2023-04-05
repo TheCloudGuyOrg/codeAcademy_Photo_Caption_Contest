@@ -14,7 +14,7 @@ const getUserByName = async (username) => {
   })
 }
 
-
+//Passport LocalStrategy
 passport.use(new LocalStrategy(
   function (username, password, done) {
     getUserByName(username)
@@ -40,10 +40,12 @@ passport.use(new LocalStrategy(
     })
 )
 
+//fix serialize
 passport.serializeUser((id, done) => {
   done(null, id);
 }); 
 
+//fix deserialize
 passport.deserializeUser((id, done) => {
   getUsersById(id, function (error, user) {
     if (err) return done(error); 

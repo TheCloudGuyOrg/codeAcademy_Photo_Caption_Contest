@@ -56,11 +56,13 @@ authApi.get("/login", (req, res) => {
     res.render("error");
 });
 
+//fix profile
 authApi.get("/profile", (req, res) => {
     res.render("profile", { user: req.user });
     res.render("profile")
   }); 
 
+  //fix logout
 authApi.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/login");
