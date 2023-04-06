@@ -3,16 +3,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 
-//Import DB Modules
-const models = require('../database/models');
-const User = models.user
-
-//Get Users by Name
-const getUserByName = async (username) => {
-  return await User.findAll({
-    where: {name: username},
-  })
-}
+const {  getUserByName, getUserById} = require("../database/helperQueries")
 
 //Passport LocalStrategy
 passport.use(new LocalStrategy(
