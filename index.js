@@ -28,8 +28,8 @@ app.use(
     session({
         secret: SESSION_SECRET, 
         cookie: {
-            maxAge: 1000 * 60 * 60 * 24, //24 Hour Cookie Expiration
-            secure: true,
+            maxAge: 1000 * 60 * 60 * 24, 
+            secure: false,
             sameSite: "none"
         },
         resave: false,
@@ -46,20 +46,20 @@ const bcrypt = require("bcrypt");
 app.use(passport.initialize());
 app.use(passport.session());
 
-//fix serialize
-passport.serializeUser((id, done) => {
-    done(null, id);
+passport.serializeUser((user, done) => {
+    return done(null, {
+        id: user[0].dataValues.id,
+        username: user[0].dataValues.name
+    });
   }); 
   
-//fix deserialize
-passport.deserializeUser((id, done) => {
-    getUsersById(id, function (error, user) {
-      if (err) return done(error); 
-        done(null, user);
+passport.deserializeUser((id, done) => {  //fix deserialize
+    getUserById(id, function (error, user) {
+        if (error) return done(error); 
+        return done(null, user);
     });
   }); 
 
-//Passport LocalStrategy
 passport.use(new LocalStrategy(
     function (username, password, done) {
       getUserByName(username)
@@ -85,19 +85,16 @@ passport.use(new LocalStrategy(
     })
 )
 
-//authRouter
+//Service Routers
 const authRouter = require("./controllers/Routesauth.js");
 app.use("/", authRouter);
 
-//photosRouter
 const photosRouter = require("./controllers/Routesphotos.js");
 app.use("/route/photos", photosRouter);
 
-//captionsRouter
 const captionsRouter = require("./controllers/Routescaptions.js");
 app.use("/route/captions", captionsRouter);
 
-//usersRouter
 const usersRouter = require("./controllers/Routesusers.js");
 app.use("/route/users", usersRouter);
 

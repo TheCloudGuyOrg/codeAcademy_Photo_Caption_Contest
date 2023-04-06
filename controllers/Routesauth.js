@@ -40,32 +40,33 @@ authApi.post("/login",
   }
 );
 
-authApi.get("/", (req, res) => {
-    res.render("home");
+authApi.get("/", (request, response) => {
+    response.render("home");
 });
 
-authApi.get("/register", (req, res) => {
-    res.render("register");
+authApi.get("/register", (request, response) => {
+    response.render("register");
   });
 
-authApi.get("/login", (req, res) => {
-    res.render("login");
+authApi.get("/login", (request, response) => {
+    response.render("login");
   });
 
-  authApi.get("/error", (req, res) => {
-    res.render("error");
+  authApi.get("/error", (request, responses) => {
+    response.render("error");
 });
 
 //fix profile
-authApi.get("/profile", (req, res) => {
-    res.render("profile", { user: req.user });
-    res.render("profile")
+authApi.get("/profile", (request, response) => {
+    console.log(request)
+    response.render("profile", {  }); //user: request.user
+    response.render("profile")
   }); 
 
   //fix logout
-authApi.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/login");
+authApi.get("/logout", (request, response) => {
+    request.logout();
+    response.redirect("/login");
   });
 
 
