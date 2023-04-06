@@ -12,6 +12,14 @@ const app = express();
 const helmet = require('helmet');
 app.use(helmet());
 
+//Import DB Helpers
+const {  getUserByName, getUserById} = require("./database/helperQueries")
+
+//Setting up Views
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.set("view engine", "ejs");
+
 //Defining User Sessions 
 const session = require('express-session')
 const storeSession = new session.MemoryStore() //Dev Only Move to DB for Prod Sessions
@@ -32,15 +40,50 @@ app.use(
 
 //Use Passport
 const passport = require("passport");
-require("./auth/passport");
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.set("view engine", "ejs");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+//fix serialize
+passport.serializeUser((id, done) => {
+    done(null, id);
+  }); 
+  
+//fix deserialize
+passport.deserializeUser((id, done) => {
+    getUsersById(id, function (error, user) {
+      if (err) return done(error); 
+        done(null, user);
+    });
+  }); 
+
+//Passport LocalStrategy
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+      getUserByName(username)
+        .then((user) => {
+    
+        if(user[0] == null) {
+            return done(null, false)
+        };
+    
+        const foundMatch = bcrypt.compare(password,user[0].dataValues.password);
+    
+        foundMatch.then((match) => {
+            if(match == false) {
+                return done(null, false)
+        } 
+  
+        return done(null, user)
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+     })
+    })
+)
 
 //authRouter
 const authRouter = require("./controllers/Routesauth.js");

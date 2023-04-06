@@ -16,6 +16,8 @@ const getUserById = async (id) => {
   })
 }
 
+getUserById(1).then((user) => console.log(user))
+
 module.exports = {
     getUserByName,
     getUserById
