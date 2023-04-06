@@ -36,7 +36,7 @@ authApi.post("/register", async (request, response) => {
 authApi.post("/login",
   passport.authenticate("local", { failureRedirect : "/error"}),
   (request, response) => {
-    response.redirect("/");
+    response.redirect("/profile");
   }
 );
 
@@ -56,16 +56,17 @@ authApi.get("/login", (request, response) => {
     response.render("error");
 });
 
-//fix profile
 authApi.get("/profile", (request, response) => {
-    console.log(request)
-    response.render("profile", {  }); //user: request.user
-    response.render("profile")
+    response.render("profile", { user: request.user }); 
   }); 
 
   //fix logout
-authApi.get("/logout", (request, response) => {
-    request.logout();
+authApi.get("/logout", (request, response, next) => {
+    request.logout(function(error) {
+      if (error){
+        return next(error)
+      }
+    });
     response.redirect("/login");
   });
 

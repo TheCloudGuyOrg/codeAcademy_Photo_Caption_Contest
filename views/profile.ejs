@@ -7,12 +7,11 @@
     <div class="span3 well">
     <center>
 				<i class="bi bi-person-circle" style="font-size: 120px;"></i>
-        <h3><%= user ? user.username : "Guest" %></h3>
+        <h3><%= user ? user : "Guest" %></h3>
+				
 				<br>
 				<p>
-					<a href="#" class="btn btn-info btn-md">
-						<span class="glyphicon glyphicon-log-out"></span> Log out
-					</a>
+					<a href="http://localhost:3000/logout"> <button type="submit" >Logout</button></a>
      		</p>
 		</center>
     </div>

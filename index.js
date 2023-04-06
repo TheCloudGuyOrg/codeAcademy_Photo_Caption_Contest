@@ -52,14 +52,18 @@ passport.serializeUser((user, done) => {
         username: user[0].dataValues.name
     });
   }); 
-  
-passport.deserializeUser((id, done) => {  //fix deserialize
-    getUserById(id, function (error, user) {
-        if (error) return done(error); 
-        return done(null, user);
-    });
-  }); 
 
+passport.deserializeUser((user, done) => {
+    getUserById(user.id)
+        .then((response, error) => {
+            const username = response[0].dataValues.name
+            if (error) {
+                return done(error)
+            }
+            return done(null, username)
+        })
+}) 
+  
 passport.use(new LocalStrategy(
     function (username, password, done) {
       getUserByName(username)
