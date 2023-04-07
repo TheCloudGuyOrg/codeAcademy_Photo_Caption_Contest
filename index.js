@@ -130,4 +130,4 @@ http.createServer(swaggerApp).listen(swaggerPort, function () {
 });
 
 //Export App
-module.exports = app;
+module.exports = app

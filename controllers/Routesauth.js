@@ -5,6 +5,17 @@ const express = require("express");
 const authApi = express.Router();
 const passport = require("passport");
 
+
+//Ensure Autnentication Function
+const ensureAuthentication = (request, response, next) => {
+  console.log(request.session)
+  if (request.session.authenticated) {
+    return next();
+  } else {
+    response.status(403).json({ msg: "You're not authorized to view this page" });
+  }
+}
+
 //Authenication Routes
 authApi.post("/register", async (request, response) => {
     const username = request.body.username
@@ -36,6 +47,7 @@ authApi.post("/register", async (request, response) => {
 authApi.post("/login",
   passport.authenticate("local", { failureRedirect : "/error"}),
   (request, response) => {
+    request.session.authenticated = true;
     response.redirect("/profile");
   }
 );
@@ -52,7 +64,7 @@ authApi.get("/login", (request, response) => {
     response.render("login");
   });
 
-  authApi.get("/error", (request, responses) => {
+  authApi.get("/error", (request, response) => {
     response.render("error");
 });
 
@@ -72,4 +84,4 @@ authApi.get("/logout", (request, response, next) => {
 
 
 //Export API
-module.exports = authApi
+module.exports = authApi, ensureAuthentication
