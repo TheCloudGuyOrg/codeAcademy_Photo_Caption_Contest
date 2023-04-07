@@ -5,17 +5,6 @@ const express = require("express");
 const authApi = express.Router();
 const passport = require("passport");
 
-
-//Ensure Autnentication Function
-const ensureAuthentication = (request, response, next) => {
-  console.log(request.session)
-  if (request.session.authenticated) {
-    return next();
-  } else {
-    response.status(403).json({ msg: "You're not authorized to view this page" });
-  }
-}
-
 //Authenication Routes
 authApi.post("/register", async (request, response) => {
     const username = request.body.username
@@ -84,4 +73,4 @@ authApi.get("/logout", (request, response, next) => {
 
 
 //Export API
-module.exports = authApi, ensureAuthentication
+module.exports = authApi

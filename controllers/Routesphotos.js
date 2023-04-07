@@ -13,9 +13,6 @@ const {
     deletePhotos,
 } = require('../service/RoutesphotosService.js');
 
-//Import ensureAuthentication
-const ensureAuthentication = require('./Routesauth.js')
-
 //Photo API Routes
 
 /**

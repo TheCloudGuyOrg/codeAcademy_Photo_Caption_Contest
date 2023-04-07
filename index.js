@@ -38,6 +38,15 @@ app.use(
     })
 )
 
+//Ensure Autnentication Function
+const ensureAuthentication = (request, response, next) => {
+    if (request.session.authenticated) {
+      return next();
+    } else {
+      response.status(403).json({ msg: "You're not authorized to view this page" });
+    }
+  }
+
 //Use Passport
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -94,13 +103,13 @@ const authRouter = require("./controllers/Routesauth.js");
 app.use("/", authRouter);
 
 const photosRouter = require("./controllers/Routesphotos.js");
-app.use("/route/photos", photosRouter);
+app.use("/route/photos", ensureAuthentication, photosRouter);
 
 const captionsRouter = require("./controllers/Routescaptions.js");
-app.use("/route/captions", captionsRouter);
+app.use("/route/captions", ensureAuthentication, captionsRouter);
 
 const usersRouter = require("./controllers/Routesusers.js");
-app.use("/route/users", usersRouter);
+app.use("/route/users", ensureAuthentication, usersRouter);
 
 //swaggerRouter configuration
 const path = require('path');
