@@ -1,16 +1,16 @@
 'use strict';
 
 //Use Express
-const express = require("express");
+const express = require('express');
 const photosApi = express.Router();
 
 //Import Queries
 const {
-    getPhotos,
-    getPhotosById,
-    addPhotos,
-    updatePhotos,
-    deletePhotos,
+	getPhotos,
+	getPhotosById,
+	addPhotos,
+	updatePhotos,
+	deletePhotos,
 } = require('../service/RoutesphotosService.js');
 
 //Photo API Routes

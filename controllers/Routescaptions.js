@@ -1,16 +1,16 @@
 'use strict';
 
 //Use Express
-const express = require("express");
+const express = require('express');
 const captionApi = express.Router();
 
 //Import Queries
 const {
-  getCaption, 
-  getCaptionById,
-  addCaption,
-  updateCaption,
-  deleteCaption
+	getCaption, 
+	getCaptionById,
+	addCaption,
+	updateCaption,
+	deleteCaption
 } = require('../service/RoutescaptionsService.js');
 
 

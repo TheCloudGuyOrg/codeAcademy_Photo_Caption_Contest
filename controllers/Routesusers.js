@@ -1,16 +1,16 @@
 'use strict';
 
 //Use Express
-const express = require("express");
+const express = require('express');
 const usersApi = express.Router();
 
 //Import Queries
 const {
-    getUsers,
-    getUsersById,
-    addUser,
-    updateUsers,
-    deleteUsers
+	getUsers,
+	getUsersById,
+	addUser,
+	updateUsers,
+	deleteUsers
 } = require('../service/RoutesusersService.js');
 
 //User API Routes
@@ -96,7 +96,7 @@ usersApi.put('/:id', updateUsers);
           description: Default error sample response
       x-swagger-router-controller: Routesuser
 **/
-usersApi.delete('/:id', deleteUsers)
+usersApi.delete('/:id', deleteUsers);
 
 //Export API
 module.exports = usersApi;
