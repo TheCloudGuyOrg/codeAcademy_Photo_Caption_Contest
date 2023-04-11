@@ -88,6 +88,7 @@ exports.addPhotos = async (request, response) => {
 //Update Photos
 exports.updatePhotos = async (request, response) => {
 	const id = parseInt(request.params.id);
+	const photos = '';
 
 	return await Photo.update({
 		name: request.query.name || photos.name,
