@@ -1,7 +1,7 @@
 'use strict';
 //Import Varables
-const dotenv = require('dotenv');
-dotenv.config({ path: './config/.env' });
+
+
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
 //Use Express
